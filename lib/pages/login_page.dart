@@ -1,3 +1,4 @@
+import 'package:chatt_app/auth/auth_service.dart';
 import 'package:chatt_app/components/auth_button.dart';
 import 'package:chatt_app/components/auth_field.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,20 @@ class LoginPage extends StatelessWidget {
 
   final void Function()? onTap;
 
-  LoginPage({
-    super.key,
-    required this.onTap});
+  LoginPage({super.key, required this.onTap});
 
-  void login () {}
+  void login(BuildContext context) async {
+    final authService = AuthService();
+    try {
+      await authService.signIn(_emailController.text, _passwordController.text);
+    } catch (e) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text(e.toString()),
+              ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,23 +35,26 @@ class LoginPage extends StatelessWidget {
             // Logo
             Icon(
               Icons.logo_dev,
-              size: 80,),
-        
+              size: 80,
+            ),
+
             // Email
             AuthField(
-              hintText: "Enter your Email/No. HP", 
+              hintText: "Enter your Email/No. HP",
               isCensored: false,
-              controller: _emailController,),
-        
+              controller: _emailController,
+            ),
+
             // Password
             AuthField(
               hintText: "Enter your Password",
               isCensored: true,
-              controller: _passwordController,),
+              controller: _passwordController,
+            ),
 
             // Login button
-            AuthButton(name: "Login", onTap: login),
-        
+            AuthButton(name: "Login", onTap: () => login(context)),
+
             // Register button
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -49,12 +62,10 @@ class LoginPage extends StatelessWidget {
                 Text("Belum punya akun? "),
                 GestureDetector(
                   onTap: onTap,
-                  child: Text(
-                    "Buat akun Sekarang!",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: const Color.fromARGB(255, 26, 91, 143)
-                    )),
+                  child: Text("Buat akun Sekarang!",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: const Color.fromARGB(255, 26, 91, 143))),
                 )
               ],
             )
