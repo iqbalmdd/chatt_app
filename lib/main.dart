@@ -1,3 +1,6 @@
+import 'package:chatt_app/pages/about_page.dart';
+import 'package:chatt_app/pages/chatt_page.dart';
+import 'package:chatt_app/pages/chatt_room.dart';
 import 'package:chatt_app/services/auth/auth_gate.dart';
 import 'package:chatt_app/firebase_options.dart';
 import 'package:chatt_app/theme/light_mode.dart';
@@ -19,6 +22,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const AuthGate(),
       theme: lightMode,
+      initialRoute: '/',
+      routes: {
+        '/home': (context) => HomePage(),
+        '/about': (context) => AboutPage(),
+        '/gallery' : (context) => AboutPage(),
+      },
     );
   }
 }

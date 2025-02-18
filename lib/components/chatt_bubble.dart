@@ -14,7 +14,7 @@ class ChattBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(8),
-      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 7),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: isCurrentUser? const Color(0xFFD9EFF9) : const Color.fromARGB(255, 255, 255, 255)

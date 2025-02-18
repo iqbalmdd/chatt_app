@@ -1,11 +1,9 @@
+import 'package:chatt_app/pages/about_page.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
   final String username;
-  const MyDrawer({
-    super.key,
-    required this.username
-    });
+  const MyDrawer({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -39,42 +37,51 @@ class MyDrawer extends StatelessWidget {
                 ),
               ),
 
-              // Chatt ListTile
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: ListTile(
-                  title: Text("Chatt"),
-                  leading: Icon(Icons.chat_bubble,
-                      color: Theme.of(context).colorScheme.primary),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-
               // About ListTile
               Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: ListTile(
                   title: Text("About PSMTI"),
                   leading: Icon(Icons.info,
-                      color: Theme.of(context).colorScheme.primary),
+                      color: const Color.fromARGB(255, 47, 129, 197)),
+                  onTap: () {Navigator.pushNamed(context, '/about');},
+                ),
+              ),
+
+              // Agenda ListTile
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: ListTile(
+                  title: Text("Agenda Kegiatan"),
+                  leading: Icon(Icons.view_agenda,
+                      color: const Color.fromARGB(255, 47, 129, 197)),
                   onTap: () {},
                 ),
               ),
 
-            // Gallery ListTile
+              // Gallery ListTile
               Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: ListTile(
                   title: Text("Gallery"),
                   leading: Icon(Icons.photo_album,
-                      color: Theme.of(context).colorScheme.primary),
+                      color: const Color.fromARGB(255, 47, 129, 197)),
                   onTap: () {},
                 ),
               ),
 
-
+              // Chatt ListTile
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: ListTile(
+                  title: Text("Chatt"),
+                  leading: Icon(Icons.chat_bubble,
+                      color: const Color.fromARGB(255, 47, 129, 197)),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
             ],
           ),
 
@@ -84,7 +91,7 @@ class MyDrawer extends StatelessWidget {
             child: ListTile(
               title: Text("Logout"),
               leading: Icon(Icons.logout,
-                  color: Theme.of(context).colorScheme.primary),
+                  color: const Color.fromARGB(255, 47, 129, 197)),
               onTap: () {},
             ),
           )
