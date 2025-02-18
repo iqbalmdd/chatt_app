@@ -1,9 +1,19 @@
 import 'package:chatt_app/pages/about_page.dart';
+import 'package:chatt_app/services/auth/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
   final String username;
-  const MyDrawer({super.key, required this.username});
+
+  MyDrawer({super.key, required this.username});
+
+  final _authService = AuthService();
+
+  void logout() {
+    final authService = AuthService();
+    authService.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +88,7 @@ class MyDrawer extends StatelessWidget {
                   leading: Icon(Icons.chat_bubble,
                       color: const Color.fromARGB(255, 47, 129, 197)),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/home');
                   },
                 ),
               ),
@@ -92,7 +102,7 @@ class MyDrawer extends StatelessWidget {
               title: Text("Logout"),
               leading: Icon(Icons.logout,
                   color: const Color.fromARGB(255, 47, 129, 197)),
-              onTap: () {},
+              onTap: logout,
             ),
           )
         ],
