@@ -15,7 +15,7 @@ class AuthField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       child: TextField(
         obscureText: isCensored,
         controller: controller,
@@ -25,10 +25,10 @@ class AuthField extends StatelessWidget {
             borderSide: BorderSide(color: Colors.transparent),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
+            borderSide: BorderSide(color: Colors.transparent),
           ),
           hintText: hintText,
-          hintStyle: TextStyle(color : Theme.of(context).colorScheme.primary),
+          hintStyle: TextStyle(color : Theme.of(context).colorScheme.primary, fontSize: 15),
         ),
       ),
     );

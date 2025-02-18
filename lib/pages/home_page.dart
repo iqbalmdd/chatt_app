@@ -18,13 +18,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String tempName = _authService.getCurrentUser()!.email!.split('@')[0];
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.tertiary,
       appBar: AppBar(
-        centerTitle: true,
-        title: Text("Home Page"),
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
+        title: Text(
+          "Hi, " + tempName,
+          style: TextStyle(fontSize: 20),),
         actions: [IconButton(onPressed: logout, icon: Icon(Icons.logout))],
       ),
-      drawer: MyDrawer(),
+      drawer: MyDrawer(username: tempName,),
       body: _buildUserList(),
     );
   }
@@ -59,7 +63,7 @@ class HomePage extends StatelessWidget {
       Map<String, dynamic> userData, BuildContext context) {
     if (userData["email"] != _authService.getCurrentUser()!.email) {
       return UserTile(
-        text: userData["email"],
+        sender: userData["email"],
         onTap: () {
           Navigator.push(
               context,

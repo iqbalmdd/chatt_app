@@ -1,4 +1,5 @@
-import 'package:chatt_app/components/auth_field.dart';
+import 'package:chatt_app/components/text_field.dart';
+import 'package:chatt_app/components/chatt_bubble.dart';
 import 'package:chatt_app/services/auth/auth_service.dart';
 import 'package:chatt_app/services/chatt/chatt_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,14 +32,43 @@ class ChattPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(receiverEmail)),
+      backgroundColor: Theme.of(context).colorScheme.secondary,
+      appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.tertiary,
+          leading: Align(
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Icon(Icons.arrow_back_ios,),
+            ),
+          ),
+          leadingWidth: 50,
+          titleSpacing: 15,
+          title: Row(
+            children: [
+              Icon(
+                Icons.account_circle,
+                size: 40,
+                color: Theme.of(context).colorScheme.surface,
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              Text(
+                receiverEmail,
+                style: TextStyle(fontSize: 20),
+              ),
+            ],
+          )),
       body: Column(
         children: [
           // all message
           Expanded(child: _buildUserList()),
 
           // input text
-          _BuildMessageInput()
+          _BuildMessageInput(context)
         ],
       ),
     );
@@ -81,26 +111,42 @@ class ChattPage extends StatelessWidget {
     return Container(
         alignment: alignment,
         child: Column(
-          crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+          crossAxisAlignment:
+              isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
-            Text(data["message"]),
+            ChattBubble(message: data["message"], isCurrentUser: isCurrentUser)
           ],
         ));
   }
 
   // Build Message Input
-  Widget _BuildMessageInput() {
-    return Row(
-      children: [
-        Expanded(
-            child: AuthField(
-                hintText: "Type a message..",
-                isCensored: false,
-                controller: _messageController)),
+  Widget _BuildMessageInput(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      color: Theme.of(context).colorScheme.tertiary,
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(35),
+            border: Border.all(
+                color: const Color.fromARGB(255, 216, 208, 208), width: 2)),
+        child: Row(
+          children: [
+            Expanded(
+                child: AuthField(
+                    hintText: "Ketik Pesan disini",
+                    isCensored: false,
+                    controller: _messageController)),
 
-        // send button
-        IconButton(onPressed: sendMessage, icon: const Icon(Icons.send))
-      ],
+            // send button
+            IconButton(
+                onPressed: sendMessage,
+                icon: const Icon(
+                  Icons.send,
+                  color: Color.fromARGB(255, 11, 94, 162),
+                ))
+          ],
+        ),
+      ),
     );
   }
 }

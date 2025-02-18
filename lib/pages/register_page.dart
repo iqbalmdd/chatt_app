@@ -1,6 +1,6 @@
 import 'package:chatt_app/services/auth/auth_service.dart';
 import 'package:chatt_app/components/auth_button.dart';
-import 'package:chatt_app/components/auth_field.dart';
+import 'package:chatt_app/components/text_field.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {

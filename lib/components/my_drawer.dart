@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
-  const MyDrawer({super.key});
+  final String username;
+  const MyDrawer({
+    super.key,
+    required this.username
+    });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class MyDrawer extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     Text(
-                      "Iqbal Muhammad",
+                      username,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w300,
@@ -35,12 +39,12 @@ class MyDrawer extends StatelessWidget {
                 ),
               ),
 
-              // Home ListTile
+              // Chatt ListTile
               Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: ListTile(
-                  title: Text("Home"),
-                  leading: Icon(Icons.home,
+                  title: Text("Chatt"),
+                  leading: Icon(Icons.chat_bubble,
                       color: Theme.of(context).colorScheme.primary),
                   onTap: () {
                     Navigator.pop(context);
@@ -48,16 +52,29 @@ class MyDrawer extends StatelessWidget {
                 ),
               ),
 
-              // Setting ListTile
+              // About ListTile
               Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: ListTile(
-                  title: Text("Setting"),
-                  leading: Icon(Icons.settings,
+                  title: Text("About PSMTI"),
+                  leading: Icon(Icons.info,
                       color: Theme.of(context).colorScheme.primary),
                   onTap: () {},
                 ),
               ),
+
+            // Gallery ListTile
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: ListTile(
+                  title: Text("Gallery"),
+                  leading: Icon(Icons.photo_album,
+                      color: Theme.of(context).colorScheme.primary),
+                  onTap: () {},
+                ),
+              ),
+
+
             ],
           ),
 
