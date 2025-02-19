@@ -1,4 +1,4 @@
-import 'package:chatt_app/components/contribution_card.dart';
+import 'package:chatt_app/components/contribution_section.dart';
 import 'package:chatt_app/components/floating_card.dart';
 import 'package:chatt_app/components/image_banner.dart';
 import 'package:chatt_app/components/my_drawer.dart';
@@ -95,7 +95,8 @@ class AboutPage extends StatelessWidget {
                   aboutUs.visi,
                   style: TextStyle(fontSize: 12),
                   textAlign: TextAlign.justify,
-                )),
+                )
+            ),
 
             SizedBox(
               height: 30,
@@ -143,6 +144,7 @@ class AboutPage extends StatelessWidget {
               height: 30,
             ),
 
+            // BLUE SECTION
             Container(
               color: const Color.fromARGB(255, 43, 125, 202),
               child: Padding(
@@ -175,17 +177,7 @@ class AboutPage extends StatelessWidget {
                     ),
 
                     // floating card bg-blue
-                    SizedBox(
-                      height: 120,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: contributionModel.contribution.length,
-                        itemBuilder: (context, index) {
-                          return ContributionCard(
-                              text: contributionModel.contribution[index]);
-                        },
-                      ),
-                    )
+                    ContributionSection(contributions: contributionModel.contribution)
                   ],
                 ),
               ),
