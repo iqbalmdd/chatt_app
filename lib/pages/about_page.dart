@@ -2,6 +2,8 @@ import 'package:chatt_app/components/contribution_section.dart';
 import 'package:chatt_app/components/floating_card.dart';
 import 'package:chatt_app/components/image_banner.dart';
 import 'package:chatt_app/components/my_drawer.dart';
+import 'package:chatt_app/components/text_list.dart';
+import 'package:chatt_app/models/about_footer_model.dart';
 import 'package:chatt_app/models/about_model.dart';
 import 'package:chatt_app/models/contribution_model.dart';
 import 'package:flutter/material.dart';
@@ -33,11 +35,29 @@ class AboutPage extends StatelessWidget {
         "Terbitnya Instruksi Presiden (Inpres) No 26 Tahun 1998 tanggal 16 September 1998 tentang Menghentikan Penggunaan Istilah Pribumi dan Non-Pribumi Dalam Semua Perumusan dan Penyelenggaraan Kebijakan, Perencanaan Program, Ataupun Pelaksanaan Kegiatan Penyelenggaraan Pemerintahan",
       ]);
 
+  final AboutFooterModel aboutFooterModel = AboutFooterModel(
+      title: "Logo PSMTI & Artinya",
+      titleDesc:
+          "Meningkatkan kesadaran ber-Masyarakat, ber-Bangsa dan ber-Negara secara berkelanjutan dan berkesinambungan",
+      subTitle: "Maksud Lambang PSMTI",
+      subTitleDesc: [
+        "Sekuntum bunga bermakna kesetiaan dalam suka dan duka",
+        "Warna biru pada bunga melambangkan ketulusan, keikhlasan dan kedamaian",
+        "Jumlah kelopak bunga 5 helai melambangkan Pancasila",
+        "Padi dan Kapas bermakna budi yang luhur dan kejayaan",
+        "Warna Kuning melambangkan budi yang luhur dan kejayaan",
+        "Bendera Merah Putih melambangkan Negara dan Bangsa Indonesia",
+        "Jumlah butir padi 17 dan bunga kapas 8, melambangkan tanggal dan bulan Proklamasi 17 Agustus 1945"
+      ]
+    );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.tertiary,
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
+        surfaceTintColor: Theme.of(context).colorScheme.tertiary,
         title: Text("About PSMTI"),
       ),
       drawer: MyDrawer(username: "Temporary Name"),
@@ -94,8 +114,7 @@ class AboutPage extends StatelessWidget {
                 child: Text(
                   aboutUs.visi,
                   style: TextStyle(fontSize: 12),
-                  textAlign: TextAlign.justify,
-                )
+                  textAlign: TextAlign.justify)
             ),
 
             SizedBox(
@@ -103,42 +122,7 @@ class AboutPage extends StatelessWidget {
             ),
 
             // Misi
-            FloatingCard(
-              title: "Misi",
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: aboutUs.misi
-                    .map((m) => Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
-                          child: IntrinsicHeight(
-                            child: Row(
-
-                                // Garis Kuning
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 4,
-                                    padding: EdgeInsets.symmetric(vertical: 20),
-                                    color: Colors.amber,
-                                  ),
-                                  const SizedBox(width: 8),
-
-                                  // Text
-                                  Flexible(
-                                    child: Text(
-                                      m,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                      textAlign: TextAlign.justify,
-                                    ),
-                                  )
-                                ]),
-                          ),
-                        ))
-                    .toList(),
-              ),
-            ),
+            FloatingCard(title: "Misi", child: TextList(text: aboutUs.misi, orangeSpace: 10,)),
 
             SizedBox(
               height: 30,
@@ -146,7 +130,16 @@ class AboutPage extends StatelessWidget {
 
             // BLUE SECTION
             Container(
-              color: const Color.fromARGB(255, 43, 125, 202),
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment.topLeft, // Titik awal gradien (0% 0%)
+                  radius: 1.5, // Sesuai dengan 150.47% dari CSS
+                  colors: [
+                    Color.fromRGBO(13, 92, 171, 0.9),  // rgba(13, 92, 171, 0.90) pada 0%
+                    Color.fromRGBO(0, 148, 214, 0.8),  // rgba(0, 148, 214, 0.80) pada 100%
+                  ],
+                  stops: [0.0, 1.0], // 0% -> 100%
+              )),
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 25),
                 child: Column(
@@ -177,11 +170,49 @@ class AboutPage extends StatelessWidget {
                     ),
 
                     // floating card bg-blue
-                    ContributionSection(contributions: contributionModel.contribution)
+                    ContributionSection(
+                        contributions: contributionModel.contribution),
                   ],
                 ),
               ),
             ),
+
+            // Logo PSMTI & Artinya
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.only(top: 15, bottom: 0, left: 25, right: 25),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(Icons.logo_dev, size: 45),
+                  SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          aboutFooterModel.title,
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          aboutFooterModel.titleDesc,
+                          style: TextStyle(fontSize: 12),
+                          textAlign: TextAlign.justify,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // Arti Lambang PSMTI
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+              child: TextList(text: aboutFooterModel.subTitleDesc, orangeSpace: 0,),
+            )
           ],
         ),
       ),

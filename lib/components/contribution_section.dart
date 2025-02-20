@@ -11,7 +11,7 @@ class ContributionSection extends StatefulWidget {
 }
 
 class _ContributionSectionState extends State<ContributionSection> {
-  final PageController _pageController = PageController(viewportFraction: 0.85);
+  final PageController _pageController = PageController(viewportFraction: 0.9);
   int _currentPage = 0;
 
   void _nextPage() {
@@ -56,18 +56,18 @@ class _ContributionSectionState extends State<ContributionSection> {
 
         // Tombol Panah Kiri
         Positioned(
-          left: 0,
+          left: -8,
           child: IconButton(
-            icon: Icon(Icons.arrow_back_ios, size: 24, color: Colors.white),
+            icon: Icon(Icons.arrow_circle_left_rounded, size: 24, color: Colors.white),
             onPressed: _prevPage,
           ),
         ),
 
         // Tombol Panah Kanan
         Positioned(
-          right: 0,
+          right: -8,
           child: IconButton(
-            icon: Icon(Icons.arrow_forward_ios, size: 24, color: Colors.white),
+            icon: Icon(Icons.arrow_circle_right_rounded, size: 24, color: Colors.white),
             onPressed: _nextPage,
           ),
         ),
@@ -105,6 +105,7 @@ class ContributionCard extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
         content: SingleChildScrollView(
           child: Text(
             text,
